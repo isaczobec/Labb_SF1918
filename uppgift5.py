@@ -35,7 +35,8 @@ def main():
     print('med inbyggda funktioner')
     print('p-värde av att barnets vikt är normalfördelad',stats.jarque_bera(vikt).pvalue)
     print('p-värde av att mammans ålder är normalfördelad',stats.jarque_bera(m_ålder).pvalue)
-    print('p-värde av att mammans längd är normalfördelad',stats.jarque_bera(m_längd).pvalue)
+    print('p-värde av att mammans längd är normalfördelad',stats.jarque_bera(m_längd).pvalue) # detta är den ända där nollhypotesen (att fördelningen är normalfördelad) inte förkastas på signifikansnivån 0.05. Denna är också den som passar linjen bäst, vilket är förväntat
     print('p-värde av att mammans vikt är normalfördelad',stats.jarque_bera(m_vikt).pvalue)
+    print('p-värde av att test',stats.jarque_bera(stats.norm.rvs(size=10000)).pvalue)
 
 main()
