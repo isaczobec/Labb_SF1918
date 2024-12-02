@@ -17,10 +17,10 @@ def test_rayleigh_parameter(
 
     # ---- ML-skattning ----
     ML_parameter = np.sqrt(np.sum(x**2) * 1/(2*M)) # denna är biased (men spelar inte så stor roll för stora M)
-    ML_expected_value = ML_parameter*np.sqrt(np.pi/2) # beräkna förväntat värde för ML-skattning
+    ML_expected_value = ML_parameter*np.sqrt(np.pi/2) # beräkna förväntat värde för fördelningen för ML-skattning
     # ---- MK-skattning ----
     MK_parameter = np.sum(x)/M * np.sqrt(2/np.pi) # denna är unbiased
-    MK_expected_value = MK_parameter*np.sqrt(np.pi/2) # beräkna förväntat värde för MK-skattning
+    MK_expected_value = MK_parameter*np.sqrt(np.pi/2) # beräkna förväntat värde för fördelningen MK-skattning
 
     # MK-skattning
 
@@ -29,17 +29,17 @@ def test_rayleigh_parameter(
     ax.set_title(f'Histogram för Rayleigh-fördelning med b={b}')
 
     # VÄLJ EN AV PARAMETERVÄRDE ELLER SKATTNING AV VÄNTEVÄRDE ATT PLOTTA!
-    # plotta förväntat värde
-    # ax.plot([expected_value, expected_value], [0, 0.2], 'r') # plotta faktiskt värde
-    # ax.plot([ML_expected_value, ML_expected_value], [0, 0.2], 'g') # plotta biased ML-skattning
-    # ax.plot([MK_expected_value, MK_expected_value], [0, 0.2], 'b') # plotta unbiased MK-skattning
     # plotta parametervärde 
-    ax.plot([b, b], [0, 0.2], 'r')
-    ax.plot([ML_parameter, ML_parameter], [0, 0.2], 'g')
-    ax.plot([MK_parameter, MK_parameter], [0, 0.2], 'b') 
+    ax.plot([b], [0.2], 'ro')
+    ax.plot([ML_parameter], [0.2], 'go')
+    ax.plot([MK_parameter], [0.2], 'bo') 
+    # plotta förväntat värde för fördelningen
+    ax.plot([expected_value, expected_value], [0, 0.2], 'r') # plotta faktiskt värde
+    ax.plot([ML_expected_value, ML_expected_value], [0, 0.2], 'g')
+    ax.plot([MK_expected_value, MK_expected_value], [0, 0.2], 'b')
 
     # legend
-    ax.legend(['Faktiskt b-värde', 'ML-skattning biased', 'MK-skattning unbiased'])
+    ax.legend(['Faktiskt b-värde', 'ML-skattning av b (biased)', 'MK-skattning (unbiased)','medelvärde','ML-skattning av väntevärde','MK-skattning av väntevärde'])
 
     # beräkna och plotta pdf för ML och MK
     pdf_x = np.linspace(np.min(x),np.max(x), 60)
